@@ -1,0 +1,34 @@
+[package]
+version = "0.0.1"
+name = "google_sign_in_wasm"
+description = "App Description"
+categories = ["wasm"]
+license = "MIT"
+readme = "./README.md"
+edition = "2018"
+
+
+[lib]
+crate-type = ["cdylib","rlib"]
+
+[dev-dependencies]
+wasm-bindgen-test = "0.3.18"
+
+
+
+[dependencies]
+js-sys = "0.3.47"
+serde = { version = "1.0.117", features = ['derive'] }
+serde_json = "1.0.59"
+wasm-bindgen = { version = "0.2.70", features = ["serde-serialize"] }
+wasm-bindgen-futures = "0.4.20"
+seed =  {version  = "0.8.0" , optional = true }
+
+
+[profile.release]
+lto = true
+opt-level = 'z'
+codegen-units = 1
+
+[package.metadata.wasm-pack.profile.release]
+wasm-opt = ['-Os']
