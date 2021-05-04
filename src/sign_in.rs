@@ -40,3 +40,13 @@ pub fn button<Ms>() -> Vec<Node<Ms>> {
         ],
     ]
 }
+
+#[cfg(feature="seed")]
+#[wasm_bindgen(inline_js = "export async function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        return auth2.signOut()
+  }")]
+extern "C" {
+    #[wasm_bindgen(catch)]
+    pub async fn signOut() -> Result<JsValue, JsValue>;
+}
