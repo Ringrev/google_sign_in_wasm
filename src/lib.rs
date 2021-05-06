@@ -25,6 +25,8 @@ extern "C" {
     pub type AuthResponse;
     #[wasm_bindgen(catch, method, getter)]
     pub fn access_token(this: &AuthResponse) -> Result<String, JsValue>;
+    #[wasm_bindgen(catch, method, getter)]
+    pub fn id_token(this: &AuthResponse) -> Result<String, JsValue>;
 }
 
 #[wasm_bindgen]
