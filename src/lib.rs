@@ -4,7 +4,7 @@
 use serde::{Deserialize, Serialize};
 use wasm_bindgen::prelude::*;
 
-#[cfg(feature="seed")]
+#[cfg(feature = "seed")]
 pub mod sign_in;
 
 #[wasm_bindgen]
@@ -15,8 +15,7 @@ extern "C" {
     #[wasm_bindgen(catch, method)]
     pub fn getAuthResponse(
         this: &GoogleUser,
-        #[allow(non_snake_case)]
-        includeAuthorizationData: bool,
+        #[allow(non_snake_case)] includeAuthorizationData: bool,
     ) -> Result<AuthResponse, JsValue>;
 }
 
@@ -33,22 +32,22 @@ extern "C" {
 extern "C" {
     pub type BasicProfile;
     #[wasm_bindgen(catch, method)]
-  pub  fn getId(this: &BasicProfile) -> Result<String, JsValue>;
+    pub fn getId(this: &BasicProfile) -> Result<String, JsValue>;
 
     #[wasm_bindgen(catch, method)]
-    pub   fn getName(this: &BasicProfile) -> Result<String, JsValue>;
+    pub fn getName(this: &BasicProfile) -> Result<String, JsValue>;
 
     #[wasm_bindgen(catch, method)]
-    pub   fn getGivenName(this: &BasicProfile) -> Result<String, JsValue>;
+    pub fn getGivenName(this: &BasicProfile) -> Result<String, JsValue>;
 
     #[wasm_bindgen(catch, method)]
-    pub     fn getFamilyName(this: &BasicProfile) -> Result<String, JsValue>;
+    pub fn getFamilyName(this: &BasicProfile) -> Result<String, JsValue>;
 
     #[wasm_bindgen(catch, method)]
-    pub   fn getImageUrl(this: &BasicProfile) -> Result<String, JsValue>;
+    pub fn getImageUrl(this: &BasicProfile) -> Result<String, JsValue>;
 
     #[wasm_bindgen(catch, method)]
-    pub   fn getEmail(this: &BasicProfile) -> Result<String, JsValue>;
+    pub fn getEmail(this: &BasicProfile) -> Result<String, JsValue>;
 
 }
 
