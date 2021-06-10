@@ -1,36 +1,44 @@
-#[cfg(feature="seed")]
+#[cfg(feature = "seed")]
 use seed::{prelude::*, *};
 
 /// Function that contain customized button and methods to use google sign in.
-/// Todo could add variables for customizing the button.
-#[cfg(feature="seed")]
-pub fn button<Ms>() -> Vec<Node<Ms>> {
+/// The button use this example  `https://developers.google.com/identity/sign-in/web/build-button`
+/// You need to inject javascript function named on_success &  on_failure.
+#[cfg(feature = "seed")]
+pub fn default_google_button<Ms>(
+    on_success: &str,
+    on_failure: &str,
+    scope: &str,
+    width: &u16,
+    height: &u16,
+    theme: &str,
+) -> Vec<Node<Ms>> {
     vec![
-                Script![attrs! {
-                  At::Src=>"https://apis.google.com/js/platform.js?onload=renderButton",
-                  At::Async=>true,
-                  At::Defer=>true,
-                }],
-                Script![
-                    "function onFailure(error) {
-                      console.log(error);
-                  }
-                  function onSuccess(googleUser) {
-                        user(googleUser);
-                  }
-                function renderButton() {
-                  gapi.signin2.render('my-signin2', {
-                    'scope': 'profile email https://www.googleapis.com/auth/youtube.force-ssl https://www.googleapis.com/auth/youtube.readonly',
-                    'width': 319,
-                    'height': 54,
+        Script![attrs! {
+          At::Src=>"https://apis.google.com/js/platform.js?onload=renderButton",
+          At::Async=>true,
+          At::Defer=>true,
+        }],
+        Script![format!(
+            "
+                      {}
+
+                      {}
+
+                function renderButton() {{
+                  gapi.signin2.render('my-signin2', {{
+                    'scope': '{}',
+                    'width': {},
+                    'height': {},
                     'longtitle': true,
-                    'theme': 'dark',
-                    'onsuccess': onSuccess,
-                    'onfailure': onFailure
-                  },
+                    'theme': '{}',
+                    'onsuccess': on_success,
+                    'onfailure': on_failure
+                   }}
                 );
-                }",
-                ],
+                 }}  ",
+            on_success, on_failure, scope, width, height, theme
+        )],
         div![
             id!("my-signin2"),
             C!["centered"],
@@ -41,7 +49,7 @@ pub fn button<Ms>() -> Vec<Node<Ms>> {
     ]
 }
 
-#[cfg(feature="seed")]
+#[cfg(feature = "seed")]
 #[wasm_bindgen(inline_js = "export async function signOut() {
         var auth2 = gapi.auth2.getAuthInstance();
         return auth2.signOut()
