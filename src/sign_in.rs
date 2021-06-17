@@ -39,13 +39,7 @@ pub fn default_google_button<Ms>(
                  }}  ",
             on_success, on_failure, scope, width, height, theme
         )],
-        div![
-            id!("my-signin2"),
-            C!["centered"],
-            style! {
-                St::MarginBottom=>"40px"
-            }
-        ],
+        div![id!("my-signin2"),],
     ]
 }
 
