@@ -1,10 +1,9 @@
-#[cfg(feature = "seed")]
+#![cfg(feature = "seed")]
 use seed::{prelude::*, *};
 
 /// Function that contain customized button and methods to use google sign in.
 /// The button use this example  `https://developers.google.com/identity/sign-in/web/build-button`
 /// You need to inject javascript function named on_success &  on_failure.
-#[cfg(feature = "seed")]
 pub fn default_google_button<Ms>(
     on_success: &str,
     on_failure: &str,
